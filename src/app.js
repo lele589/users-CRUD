@@ -1,6 +1,7 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const { setUserRoutes } = require('./infrastructure/in/userRoutes');
+import express from 'express';
+import bodyParser from 'body-parser';
+import setUserRoutes from './infrastructure/in/userRoutes.js';
+import { userController } from './infrastructure/container.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,4 +14,4 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
 
-module.exports = app;
+export default app;

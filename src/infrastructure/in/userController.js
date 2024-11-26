@@ -4,19 +4,19 @@ class UserController {
         this.getUserCommand = getUserCommand;
     }
 
-    createUser(req, res) {
+    async createUser(req, res) {
         try {
-            const user = this.createUserCommand.execute(req.body);
+            const user = await this.createUserCommand.execute(req.body);
             res.status(201).json(user);
         } catch (error) {
             res.status(400).json({ message: error.message });
         }
     }
 
-    getUser(req, res) {
+    async getUser(req, res) {
         try {
             const userId = Number(req.params.id); // Aqui podría ir JOI y la validación del contrato para que autotransforme el Id type
-            const user = this.getUserCommand.execute(userId);
+            const user = await this.getUserCommand.execute(userId);
             if (!user) {
                 return res.status(404).json({ message: 'User not found' });
             }
@@ -27,4 +27,4 @@ class UserController {
     }
 }
 
-module.exports = UserController;
+export default UserController;

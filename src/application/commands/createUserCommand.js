@@ -3,9 +3,9 @@ class CreateUserCommand {
         this.userService = userService;
     }
 
-    async execute(userData) {
+    execute(userData) {
         return this.userService.createUser(userData);
     }
 }
 
-module.exports = CreateUserCommand;
+export default CreateUserCommand;

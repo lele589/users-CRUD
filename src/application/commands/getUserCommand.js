@@ -8,4 +8,4 @@ class GetUserCommand {
     }
 }
 
-module.exports = GetUserCommand;
+export default GetUserCommand;

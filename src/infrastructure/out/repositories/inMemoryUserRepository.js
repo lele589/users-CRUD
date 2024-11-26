@@ -15,4 +15,4 @@ class inMemoryUserRepository {
     }
 }
 
-module.exports = inMemoryUserRepository;
+export default inMemoryUserRepository;
