@@ -1,11 +1,11 @@
-# My Express App
+# Users CRUD
 
 This is a simple Express.js application that demonstrates user management functionality. The application allows for creating and retrieving user information through a RESTful API.
 
 ## Project Structure
 
 ```
-my-express-app
+users-crud
 ├── src
 │   ├── controllers
 │   │   ├── userController.js
@@ -35,7 +35,7 @@ my-express-app
 
 2. Navigate to the project directory:
    ```
-   cd my-express-app
+   cd users-crud
    ```
 
 3. Install dependencies:
@@ -57,7 +57,3 @@ my-express-app
 ## Environment Variables
 
 Make sure to create a `.env` file in the root directory with the necessary configuration, such as database connection strings.
-
-## License
-
-This project is licensed under the MIT License.
