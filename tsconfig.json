@@ -3,8 +3,9 @@
     "target": "ES6",
     "strict": true,
     "skipLibCheck": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "allowSyntheticDefaultImports": true
   },
-  "include": ["src/**/*.ts", "src/infrastructure/in/userRoutes.js"],
+  "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
 }
