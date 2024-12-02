@@ -3,6 +3,7 @@
     "target": "ES6",
     "strict": true,
     "skipLibCheck": true,
+    "esModuleInterop": true, // TODO: que es esto?
     "outDir": "./dist",
     "allowSyntheticDefaultImports": true
   },
