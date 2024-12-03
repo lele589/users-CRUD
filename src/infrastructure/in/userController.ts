@@ -1,42 +1,37 @@
-import { CreateUserCommandTypes } from "../../application/commands/createUserCommand";
+import { CreateUserCommandInterface } from "../../application/commands/createUserCommand";
 import { GetUserCommandTypes } from "../../application/commands/getUserCommand";
 import { User } from "../../types/User";
 import { Request, Response } from 'express';
+import { UserControllerInterface } from "./UserControllerInterface";
 
-export interface UserControllerTypes {
-    createUser(req: Request<User>, res: Response): Response | void;
-    getUser(req: Request<{ id: string }>, res: Response): Response | void;
-}
-
-class UserController implements UserControllerTypes {
-    private createUserCommand: CreateUserCommandTypes;
+class UserController implements UserControllerInterface {
+    private createUserCommand: CreateUserCommandInterface;
     private getUserCommand: GetUserCommandTypes;
 
-    constructor(createUserCommand: CreateUserCommandTypes, getUserCommand: GetUserCommandTypes) {
+    constructor(createUserCommand: CreateUserCommandInterface, getUserCommand: GetUserCommandTypes) {
         this.createUserCommand = createUserCommand;
         this.getUserCommand = getUserCommand;
     }
 
-    createUser(req: Request<User>, res: Response): Response | void {
+    createUser(req: Request<User>, res: Response): Response {
         try {
-            // TODO: es necesario tipar las variables locales?
-            const user: User = this.createUserCommand.execute(req.body);
+            const user = this.createUserCommand.execute(req.body);
             return res.status(201).json(user);
         } catch (error) {
             return res.status(400).json({ message: (error as Error).message });
         }
     }
 
-    getUser(req: Request<{ id: string }>, res: Response): Response | void {
+    getUser(req: Request<{ id: string }>, res: Response): Response {
         try {
-            const userId: number = Number(req.params.id); // Aqui podría ir JOI y la validación del contrato para que autotransforme el Id type
-            const user: User | undefined = this.getUserCommand.execute(userId);
+            const userId = Number(req.params.id); // Aqui podría ir JOI y la validación del contrato para que autotransforme el Id type
+            const user = this.getUserCommand.execute(userId);
             if (!user) {
                 return res.status(404).json({ message: 'User not found' });
             }
-            res.status(200).json(user);
+            return res.status(200).json(user);
         } catch (error) {
-            res.status(400).json({ message: (error as Error).message });
+            return res.status(400).json({ message: (error as Error).message });
         }
     }
 }

@@ -1,14 +1,14 @@
 import { User } from "../../types/User";
-import { UserServiceTypes } from "../../types/UserService";
+import { UserServiceInterface } from "../../domain/UserServiceInterface";
 
 export interface GetUserCommandTypes {
     execute(userId: User['id']): User | undefined;
 }
 
 class GetUserCommand implements GetUserCommandTypes {
-    private userService: UserServiceTypes;
+    private userService: UserServiceInterface;
 
-    constructor(userService: UserServiceTypes) {
+    constructor(userService: UserServiceInterface) {
         this.userService = userService;
     }
 

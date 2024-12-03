@@ -1,8 +1,8 @@
 import { User } from "../types/User";
-import { UserServiceTypes } from "../types/UserService";
+import { UserServiceInterface } from "./UserServiceInterface";
 import { UserRepository } from "./userRepository";
 
-class UserService implements UserServiceTypes {
+class UserService implements UserServiceInterface {
     private userRepository: UserRepository
 
     constructor(userRepository: UserRepository) {

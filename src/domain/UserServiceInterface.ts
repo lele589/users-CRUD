@@ -1,6 +1,6 @@
-import { User } from "./User";
+import { User } from "../types/User";
 
-export interface UserServiceTypes {
+export interface UserServiceInterface {
     createUser(userData: User): User;
     getUser(userId: User['id']): User | undefined;
 }
