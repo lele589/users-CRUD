@@ -2,7 +2,7 @@ import { User } from "../../types/User";
 import { UserServiceInterface } from "../../domain/UserServiceInterface";
 
 export interface GetUserCommandTypes {
-    execute(userId: User['id']): User | undefined;
+    execute(userId: User['id']): Promise<User>;
 }
 
 class GetUserCommand implements GetUserCommandTypes {
@@ -12,7 +12,7 @@ class GetUserCommand implements GetUserCommandTypes {
         this.userService = userService;
     }
 
-    execute(userId: User['id']): User | undefined {
+    execute(userId: User['id']) {
         return this.userService.getUser(userId);
     }
 }

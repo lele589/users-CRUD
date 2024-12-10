@@ -13,19 +13,19 @@ class UserController implements UserControllerInterface {
         this.getUserCommand = getUserCommand;
     }
 
-    createUser(req: Request<User>, res: Response): Response {
+    async createUser(req: Request<User>, res: Response) {
         try {
-            const user = this.createUserCommand.execute(req.body);
+            const user = await this.createUserCommand.execute(req.body);
             return res.status(201).json(user);
         } catch (error) {
             return res.status(400).json({ message: (error as Error).message });
         }
     }
 
-    getUser(req: Request<{ id: string }>, res: Response): Response {
+    async getUser(req: Request<{ id: string }>, res: Response) {
         try {
             const userId = Number(req.params.id); // Aqui podría ir JOI y la validación del contrato para que autotransforme el Id type
-            const user = this.getUserCommand.execute(userId);
+            const user = await this.getUserCommand.execute(userId);
             if (!user) {
                 return res.status(404).json({ message: 'User not found' });
             }

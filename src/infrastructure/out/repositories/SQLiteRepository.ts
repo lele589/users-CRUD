@@ -1,5 +1,5 @@
-import { UserRepository } from "../../../domain/userRepository.ts";
-import { User } from "../../../types/User.ts";
+import { UserRepository } from "../../../domain/userRepository";
+import { User } from "../../../types/User";
 import { DatabaseSync } from 'node:sqlite';
 const database = new DatabaseSync('./database.sqlite');
 

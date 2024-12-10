@@ -3,7 +3,7 @@ import { User } from "../../types/User";
 import { UserServiceInterface } from '../../domain/UserServiceInterface';
 
 export interface CreateUserCommandInterface {
-    execute(userData: User): User;
+    execute(userData: User): Promise<User>;
 }
 
 class CreateUserCommand implements CreateUserCommandInterface {
@@ -13,7 +13,7 @@ class CreateUserCommand implements CreateUserCommandInterface {
         this.userService = userService;
     }
 
-    execute(userData: User): User {
+    execute(userData: User) {
         return this.userService.createUser(userData);
     }
 }
