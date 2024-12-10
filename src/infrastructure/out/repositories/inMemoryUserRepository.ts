@@ -9,14 +9,30 @@ class InMemoryUserRepository implements UserRepository {
         this.users = [];
     }
 
-    createUser(user: User): User {
-        this.users.push(user);
-        return user;
+    createUser(user: User): Promise<User> {
+        return new Promise<User>((resolve, reject) => {
+            try {
+            this.users.push(user);
+            resolve(user);
+            } catch (error) {
+            reject(error);
+            }
+        });
     }
 
-    getUser(userId: number): User | undefined {
-        const user = this.users.find(currentUser => currentUser.id === userId);
-        return user;
+    getUser(userId: number) {
+        return new Promise<User>((resolve, reject) => {
+            try {
+                const user = this.users.find(currentUser => currentUser.id === userId);
+                if (!user) {
+                    reject(new Error('Error getting user'));
+                } else {
+                    resolve(user);
+                }
+            } catch (error) {
+                reject(error);
+            }
+        });
     }
 }
 
