@@ -1,15 +1,12 @@
 {
   "compilerOptions": {
-    "target": "ES6",
+    "module": "ES2022",
+    "target": "ES2023",
     "strict": true,
     "skipLibCheck": true,
-    "esModuleInterop": true, // TODO: que es esto?
+    "esModuleInterop": true, // para importar modulos externos que usan commonjs (require)
+    "rootDir": "./src",
     "outDir": "./dist",
-    "allowSyntheticDefaultImports": true,
-    // "allowImportingTsExtensions": true,
-    // "noEmit": true,
-    // "moduleResolution": "bundler",
-    "module": "ES6"
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]

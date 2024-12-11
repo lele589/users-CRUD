@@ -1,5 +1,5 @@
-import { CreateUserCommandInterface } from "../../application/commands/createUserCommand";
-import { GetUserCommandTypes } from "../../application/commands/getUserCommand";
+import { CreateUserCommandInterface } from "../../application/commands/createUserCommand.js";
+import { GetUserCommandTypes } from "../../application/commands/getUserCommand.js";
 import { User } from "../../types/User";
 import { Request, Response } from 'express';
 import { UserControllerInterface } from "./UserControllerInterface";

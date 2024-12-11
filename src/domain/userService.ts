@@ -1,6 +1,6 @@
 import { User } from "../types/User";
 import { UserServiceInterface } from "./UserServiceInterface";
-import { UserRepository } from "./userRepository";
+import { UserRepository } from "./userRepository.js";
 
 class UserService implements UserServiceInterface {
     private userRepository: UserRepository
