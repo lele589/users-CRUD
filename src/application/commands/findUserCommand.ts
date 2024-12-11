@@ -1,12 +1,12 @@
 import { User } from "../../types/User";
 import { UserServiceInterface } from "../../domain/UserServiceInterface.js";
-import { GetUserResult } from "../../domain/userRepository";
+import { FindUserTypes } from "../../domain/userRepository";
 
-export interface GetUserCommandTypes {
-    execute(userId: User['id']): GetUserResult;
+export interface FindUserCommandTypes {
+    execute(userId: User['id']): FindUserTypes;
 }
 
-class GetUserCommand implements GetUserCommandTypes {
+class FindUserCommand implements FindUserCommandTypes {
     private userService: UserServiceInterface;
 
     constructor(userService: UserServiceInterface) {
@@ -14,8 +14,8 @@ class GetUserCommand implements GetUserCommandTypes {
     }
 
     execute(userId: User['id']) {
-        return this.userService.getUser(userId);
+        return this.userService.findUser(userId);
     }
 }
 
-export default GetUserCommand;
+export default FindUserCommand;

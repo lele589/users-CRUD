@@ -13,8 +13,8 @@ class UserService implements UserServiceInterface {
         return this.userRepository.createUser(userData);
     }
 
-    getUser(userId: User['id']) {
-        return this.userRepository.getUser(userId);
+    findUser(userId: User['id']) {
+        return this.userRepository.findUser(userId);
     }
 }
 

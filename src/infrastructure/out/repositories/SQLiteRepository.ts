@@ -1,6 +1,6 @@
 import { resolve } from "dns";
 import { data } from "../../../../../../node_modules/@remix-run/router/dist/utils";
-import { UserRepository, CreateUserResult, GetUserResult } from "../../../domain/userRepository";
+import { UserRepository, CreateUserTypes, FindUserTypes, SearchUsersTypes as SearchUsersTypes } from "../../../domain/userRepository";
 import { User } from "../../../types/User";
 import { DatabaseSync } from 'node:sqlite';
 const database = new DatabaseSync('./database.sqlite');
@@ -9,7 +9,7 @@ const database = new DatabaseSync('./database.sqlite');
 class SQLiteRepository implements UserRepository {
 
     // TODO: por qué necesito aqui explicitar CreateUserResult?
-    createUser(userData: User): CreateUserResult {
+    createUser(userData: User): CreateUserTypes {
             try {
                 const insert = database.prepare('INSERT INTO users (id, name) VALUES (?, ?)');
                 insert.run(userData.id, userData.name);
@@ -19,7 +19,7 @@ class SQLiteRepository implements UserRepository {
             }
     }
 
-    getUser(userId: number): GetUserResult {
+    findUser(userId: number): FindUserTypes {
         try {
             // Al usar 'AS' no se quejaría del undefined, pero necesitamos igualmente controlarlo para evitar errores
             // evitar usar 'AS', mejor un genérico si se puede definir

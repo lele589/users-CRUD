@@ -1,16 +1,16 @@
 import { CreateUserCommandInterface } from "../../application/commands/createUserCommand.js";
-import { GetUserCommandTypes } from "../../application/commands/getUserCommand.js";
+import { FindUserCommandTypes } from "../../application/commands/findUserCommand.js";
 import { User } from "../../types/User";
 import { Request, Response } from 'express';
 import { UserControllerInterface } from "./UserControllerInterface";
 
 class UserController implements UserControllerInterface {
     private createUserCommand: CreateUserCommandInterface;
-    private getUserCommand: GetUserCommandTypes;
+    private findUserCommand: FindUserCommandTypes;
 
-    constructor(createUserCommand: CreateUserCommandInterface, getUserCommand: GetUserCommandTypes) {
+    constructor(createUserCommand: CreateUserCommandInterface, findUserCommand: FindUserCommandTypes) {
         this.createUserCommand = createUserCommand;
-        this.getUserCommand = getUserCommand;
+        this.findUserCommand = findUserCommand;
     }
 
     async createUser(req: Request<User>, res: Response) {
@@ -22,10 +22,10 @@ class UserController implements UserControllerInterface {
         }
     }
 
-    async getUser(req: Request<{ id: string }>, res: Response) {
+    async findUser(req: Request<{ id: string }>, res: Response) {
         try {
             const userId = Number(req.params.id); // Aqui podría ir JOI y la validación del contrato para que autotransforme el Id type
-            const user = await this.getUserCommand.execute(userId);
+            const user = await this.findUserCommand.execute(userId);
             if (!user) {
                 res.status(404).json({ message: 'User not found' });
             } else {
