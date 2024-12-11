@@ -1,7 +1,7 @@
 import { User } from "../types/User";
-import { CreateUserResult } from "./userRepository";
+import { CreateUserResult, GetUserResult } from "./userRepository";
 
 export interface UserServiceInterface {
     createUser(userData: User): CreateUserResult;
-    getUser(userId: User['id']): Promise<User>;
+    getUser(userId: User['id']): GetUserResult;
 }

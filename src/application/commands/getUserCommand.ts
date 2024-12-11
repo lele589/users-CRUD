@@ -1,8 +1,9 @@
 import { User } from "../../types/User";
 import { UserServiceInterface } from "../../domain/UserServiceInterface.js";
+import { GetUserResult } from "../../domain/userRepository";
 
 export interface GetUserCommandTypes {
-    execute(userId: User['id']): Promise<User>;
+    execute(userId: User['id']): GetUserResult;
 }
 
 class GetUserCommand implements GetUserCommandTypes {

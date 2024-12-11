@@ -1,5 +1,6 @@
+import { resolve } from "dns";
 import { data } from "../../../../../../node_modules/@remix-run/router/dist/utils";
-import { UserRepository, CreateUserResult } from "../../../domain/userRepository";
+import { UserRepository, CreateUserResult, GetUserResult } from "../../../domain/userRepository";
 import { User } from "../../../types/User";
 import { DatabaseSync } from 'node:sqlite';
 const database = new DatabaseSync('./database.sqlite');
@@ -18,21 +19,18 @@ class SQLiteRepository implements UserRepository {
             }
     }
 
-    getUser(userId: number) {
-        return new Promise<User>((resolve, reject) => {
-            try {
-                // Al usar 'AS' no se quejaría del undefined, pero necesitamos igualmente controlarlo para evitar errores
-                // evitar usar 'AS', mejor un genérico si se puede definir
-                const user = database.prepare('SELECT * FROM users WHERE id = ?').get(userId) as User | undefined; 
-                if (!user) {
-                    reject(new Error('Error getting user'));
-                } else {
-                    resolve(user);
-                }
-            } catch (error) {
-                reject(new Error('Error getting user'));
+    getUser(userId: number): GetUserResult {
+        try {
+            // Al usar 'AS' no se quejaría del undefined, pero necesitamos igualmente controlarlo para evitar errores
+            // evitar usar 'AS', mejor un genérico si se puede definir
+            const user = database.prepare('SELECT * FROM users WHERE id = ?').get(userId) as User | undefined; 
+            if (!user) {
+                return { success: false, error: 'User not found' };
             }
-        });
+            return { success: true, data: user };
+        } catch (error) {
+            return { success: false, error: 'Error getting user' };
+        }
     }
 }
 
