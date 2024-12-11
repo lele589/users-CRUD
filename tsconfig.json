@@ -5,7 +5,11 @@
     "skipLibCheck": true,
     "esModuleInterop": true, // TODO: que es esto?
     "outDir": "./dist",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    // "allowImportingTsExtensions": true,
+    // "noEmit": true,
+    // "moduleResolution": "bundler",
+    "module": "ES6"
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
