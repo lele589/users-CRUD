@@ -1,8 +1,9 @@
 import { User } from "../../types/User";
 import { UserServiceInterface } from '../../domain/UserServiceInterface.js';
+import { CreateUserResult } from "../../domain/userRepository";
 
 export interface CreateUserCommandInterface {
-    execute(userData: User): Promise<User>;
+    execute(userData: User): CreateUserResult;
 }
 
 class CreateUserCommand implements CreateUserCommandInterface {

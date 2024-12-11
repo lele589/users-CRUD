@@ -1,4 +1,5 @@
-import { UserRepository } from "../../../domain/userRepository";
+import { data } from "../../../../../../node_modules/@remix-run/router/dist/utils";
+import { UserRepository, CreateUserResult } from "../../../domain/userRepository";
 import { User } from "../../../types/User";
 import { DatabaseSync } from 'node:sqlite';
 const database = new DatabaseSync('./database.sqlite');
@@ -6,16 +7,15 @@ const database = new DatabaseSync('./database.sqlite');
 // aquí podría ir el knex
 class SQLiteRepository implements UserRepository {
 
-    createUser(userData: User) {
-        return new Promise<User>((resolve, reject) => {
+    // TODO: por qué necesito aqui explicitar CreateUserResult?
+    createUser(userData: User): CreateUserResult {
             try {
                 const insert = database.prepare('INSERT INTO users (id, name) VALUES (?, ?)');
                 insert.run(userData.id, userData.name);
-                resolve(userData);
+                return { success: true, data: `User ${userData.id} created` };
             } catch (error) {
-                reject(error);
+                return { success: false, error: 'Error creating user' };
             }
-        });
     }
 
     getUser(userId: number) {

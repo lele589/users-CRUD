@@ -1,4 +1,5 @@
-import { UserRepository } from "../../../domain/userRepository";
+import { resolve } from "node:dns";
+import { CreateUserResult, UserRepository } from "../../../domain/userRepository";
 import { User } from "../../../types/User";
 
 // aquí podría ir el knex
@@ -9,15 +10,14 @@ class InMemoryUserRepository implements UserRepository {
         this.users = [];
     }
 
-    createUser(user: User) {
-        return new Promise<User>((resolve, reject) => {
-            try {
-                this.users.push(user);
-                resolve(user);
-            } catch (error) {
-                reject(error);
-            }
-        });
+    createUser(user: User): CreateUserResult {
+        try {
+            this.users.push(user);
+            return { success: true, data: `User ${user.id} created` };
+        } catch (error) {
+            // TODO: modelado de errores?
+            return { success: false, error: 'Error creating user' };
+        }
     }
 
     getUser(userId: number) {
