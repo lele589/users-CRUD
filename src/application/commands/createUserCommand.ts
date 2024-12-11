@@ -1,6 +1,5 @@
-import UserService from "../../domain/userService";
 import { User } from "../../types/User";
-import { UserServiceInterface } from '../../domain/UserServiceInterface';
+import { UserServiceInterface } from '../../domain/UserServiceInterface.js';
 
 export interface CreateUserCommandInterface {
     execute(userData: User): Promise<User>;

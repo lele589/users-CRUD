@@ -1,9 +1,9 @@
-import UserService from '../domain/userService';
-import UserController from './in/userController';
-import GetUserCommand from '../application/commands/getUserCommand';
-import CreateUserCommand from '../application/commands/createUserCommand';
+import UserService from '../domain/userService.js';
+import UserController from './in/userController.js';
+import GetUserCommand from '../application/commands/getUserCommand.js';
+import CreateUserCommand from '../application/commands/createUserCommand.js';
 // import InMemoryUserRepository from './out/repositories/inMemoryUserRepository.ts';
-import SQLiteRepository from './out/repositories/SQLiteRepository';
+import SQLiteRepository from './out/repositories/SQLiteRepository.js';
 
 const userRepository = new SQLiteRepository();
 const userService = new UserService(userRepository);

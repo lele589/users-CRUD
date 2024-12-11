@@ -1,5 +1,5 @@
 import { User } from "../../types/User";
-import { UserServiceInterface } from "../../domain/UserServiceInterface";
+import { UserServiceInterface } from "../../domain/UserServiceInterface.js";
 
 export interface GetUserCommandTypes {
     execute(userId: User['id']): Promise<User>;
