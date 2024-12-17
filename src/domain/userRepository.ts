@@ -1,19 +1,16 @@
 import { User } from "../types/User";
 
-export type CreateUserTypes = 
-    | { success: true; data: string; error?: never }
+// Genéricos: T para types, E para errors
+type ResultType<T> = 
+    | { success: true; data: T; error?: never }
     | { success: false; data?: never; error: string };
 
-export type FindUserTypes =
-    | { success: true; data: User; error?: never }
-    | { success: false; data?: never; error: string };
-
-export type SearchUsersTypes =
-    | { success: true; data: User[] | []; error?: never }
-    | { success: false; data?: never; error: string };
+export type CreateUserTypes = ResultType<User>;
+export type FindUserTypes = ResultType<User>;
+export type SearchUsersTypes = ResultType<User[]>;
 
 export interface UserRepository {
     createUser(userData: User): CreateUserTypes;
     findUser(userId: User['id']): FindUserTypes;
-    searchUsers(): SearchUsersTypes;
+    // searchUsers(): SearchUsersTypes;
 }

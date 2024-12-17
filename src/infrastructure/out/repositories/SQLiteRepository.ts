@@ -13,7 +13,7 @@ class SQLiteRepository implements UserRepository {
             try {
                 const insert = database.prepare('INSERT INTO users (id, name) VALUES (?, ?)');
                 insert.run(userData.id, userData.name);
-                return { success: true, data: `User ${userData.id} created` };
+                return { success: true, data: userData };
             } catch (error) {
                 return { success: false, error: 'Error creating user' };
             }
