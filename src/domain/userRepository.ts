@@ -1,4 +1,4 @@
-import { User } from "../types/User";
+import { User } from "../infrastructure/out/types/User";
 
 // Genéricos: T para types, E para errors
 type ResultType<T> = 

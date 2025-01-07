@@ -1,9 +1,9 @@
-import { User } from "../../types/User";
 import { UserServiceInterface } from "../../domain/UserServiceInterface.js";
 import { FindUserTypes } from "../../domain/userRepository";
+import { UserApplicationDTO } from "../types/UserApplicationDTO";
 
 export interface FindUserCommandTypes {
-    execute(userId: User['id']): FindUserTypes;
+    execute(userId: UserApplicationDTO['id']): FindUserTypes;
 }
 
 class FindUserCommand implements FindUserCommandTypes {
@@ -13,7 +13,7 @@ class FindUserCommand implements FindUserCommandTypes {
         this.userService = userService;
     }
 
-    execute(userId: User['id']) {
+    execute(userId: UserApplicationDTO['id']) {
         return this.userService.findUser(userId);
     }
 }

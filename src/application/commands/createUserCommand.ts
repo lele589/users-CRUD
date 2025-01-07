@@ -1,9 +1,9 @@
-import { User } from "../../types/User";
 import { UserServiceInterface } from '../../domain/UserServiceInterface.js';
 import { CreateUserTypes } from "../../domain/userRepository";
+import { UserApplicationDTO } from "../types/UserApplicationDTO";
 
 export interface CreateUserCommandInterface {
-    execute(userData: User): CreateUserTypes;
+    execute(userData: UserApplicationDTO): CreateUserTypes;
 }
 
 class CreateUserCommand implements CreateUserCommandInterface {
@@ -13,8 +13,10 @@ class CreateUserCommand implements CreateUserCommandInterface {
         this.userService = userService;
     }
 
-    execute(userData: User) {
-        return this.userService.createUser(userData);
+    execute(userData: UserApplicationDTO) {
+        const userFullName = `${userData.firstName} ${userData.lastName}`;
+        const user = {id: userData.id , name: userFullName, email: userData.email};
+        return this.userService.createUser(user);
     }
 }
 

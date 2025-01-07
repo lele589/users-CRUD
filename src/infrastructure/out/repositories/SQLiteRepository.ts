@@ -1,7 +1,7 @@
 import { resolve } from "dns";
 import { data } from "../../../../../../node_modules/@remix-run/router/dist/utils";
 import { UserRepository, CreateUserTypes, FindUserTypes, SearchUsersTypes as SearchUsersTypes } from "../../../domain/userRepository";
-import { User } from "../../../types/User";
+import { User } from "../types/User";
 import { DatabaseSync } from 'node:sqlite';
 const database = new DatabaseSync('./database.sqlite');
 

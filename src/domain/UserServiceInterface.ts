@@ -1,4 +1,4 @@
-import { User } from "../types/User";
+import { User } from "../infrastructure/out/types/User";
 import { CreateUserTypes, FindUserTypes } from "./userRepository";
 
 export interface UserServiceInterface {

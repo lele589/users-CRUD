@@ -1,8 +1,8 @@
 import { CreateUserCommandInterface } from "../../application/commands/createUserCommand.js";
 import { FindUserCommandTypes } from "../../application/commands/findUserCommand.js";
-import { User } from "../../types/User";
 import { Request, Response } from 'express';
 import { UserControllerInterface } from "./UserControllerInterface";
+import { UserControllerDTO } from "./types/UserControllerDTO.js";
 
 class UserController implements UserControllerInterface {
     private createUserCommand: CreateUserCommandInterface;
@@ -13,8 +13,9 @@ class UserController implements UserControllerInterface {
         this.findUserCommand = findUserCommand;
     }
 
-    async createUser(req: Request<User>, res: Response) {
+    async createUser(req: Request<UserControllerDTO>, res: Response) {
         try {
+            // TODO: validate contract
             const user = await this.createUserCommand.execute(req.body);
             res.status(201).json(user);
         } catch (error) {

@@ -1,4 +1,4 @@
-import { User } from "../types/User";
+import { User } from "../infrastructure/out/types/User";
 import { UserServiceInterface } from "./UserServiceInterface";
 import { UserRepository } from "./userRepository.js";
 
