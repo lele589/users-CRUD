@@ -1,6 +1,6 @@
 import { resolve } from "dns";
 import { data } from "../../../../../../node_modules/@remix-run/router/dist/utils";
-import { UserRepository, CreateUserTypes, FindUserTypes, SearchUsersTypes as SearchUsersTypes } from "../../../domain/userRepository";
+import { UserRepository, CreateUserTypes, FindUserTypes, SearchUsersTypes as SearchUsersTypes } from "../../../domain/User/userRepository";
 import { User } from "../types/User";
 import { DatabaseSync } from 'node:sqlite';
 const database = new DatabaseSync('./database.sqlite');
@@ -11,8 +11,8 @@ class SQLiteRepository implements UserRepository {
     // TODO: por qué necesito aqui explicitar CreateUserResult?
     createUser(userData: User): CreateUserTypes {
             try {
-                const insert = database.prepare('INSERT INTO users (id, name) VALUES (?, ?)');
-                insert.run(userData.id, userData.name);
+                const insert = database.prepare('INSERT INTO users (id, name, email) VALUES (?, ?, ?)');
+                insert.run(userData.id, userData.name, userData.email);
                 return { success: true, data: userData };
             } catch (error) {
                 return { success: false, error: 'Error creating user' };
@@ -27,7 +27,13 @@ class SQLiteRepository implements UserRepository {
             if (!user) {
                 return { success: false, error: 'User not found' };
             }
-            return { success: true, data: user };
+            const userName = user.name.split(' ');
+            return { success: true, data: {
+                id: user.id,
+                firstName: userName[0],
+                lastName: userName[1],
+                email: user.email
+            }};
         } catch (error) {
             return { success: false, error: 'Error getting user' };
         }

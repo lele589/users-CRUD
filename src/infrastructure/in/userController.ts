@@ -24,13 +24,18 @@ class UserController implements UserControllerInterface {
     }
 
     async findUser(req: Request<{ id: string }>, res: Response) {
+        // TODO: poner returns mejor
         try {
             const userId = Number(req.params.id); // Aqui podría ir JOI y la validación del contrato para que autotransforme el Id type
-            const user = await this.findUserCommand.execute(userId);
-            if (!user) {
-                res.status(404).json({ message: 'User not found' });
+            const { success, data: user} = await this.findUserCommand.execute(userId);
+            if(!success) {
+                res.status(500).json({ message: 'Unexpected error' });
             } else {
-                res.status(200).json(user);
+                if (!user) {
+                    res.status(404).json({ message: 'User not found' });
+                } else {
+                    res.status(200).json(user);
+                }
             }
         } catch (error) {
             res.status(400).json({ message: (error as Error).message });

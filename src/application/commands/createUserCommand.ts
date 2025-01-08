@@ -1,22 +1,23 @@
-import { UserServiceInterface } from '../../domain/UserServiceInterface.js';
-import { CreateUserTypes } from "../../domain/userRepository";
+import { UserEntity } from '../../domain/User/UserEntity.js';
+import { CreateUserTypes } from "../../domain/User/userRepository";
 import { UserApplicationDTO } from "../types/UserApplicationDTO";
+import { UserModelInterface } from "../../domain/User/UserModelInterface";
 
 export interface CreateUserCommandInterface {
     execute(userData: UserApplicationDTO): CreateUserTypes;
 }
 
 class CreateUserCommand implements CreateUserCommandInterface {
-    private userService: UserServiceInterface;
+    private userModel: UserModelInterface;
 
-    constructor(userService: UserServiceInterface) {
-        this.userService = userService;
+    constructor(userModel: UserModelInterface) {
+        this.userModel = userModel;
     }
 
     execute(userData: UserApplicationDTO) {
-        const userFullName = `${userData.firstName} ${userData.lastName}`;
-        const user = {id: userData.id , name: userFullName, email: userData.email};
-        return this.userService.createUser(user);
+        // TODO: manejar para que no llegue success/data al controller
+        const newUserInstance = new UserEntity(userData);
+        return this.userModel.createUser(newUserInstance);
     }
 }
 
