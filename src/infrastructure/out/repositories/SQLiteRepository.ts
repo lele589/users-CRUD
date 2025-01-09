@@ -3,6 +3,7 @@ import { data } from "../../../../../../node_modules/@remix-run/router/dist/util
 import { UserRepository, CreateUserTypes, FindUserTypes, SearchUsersTypes as SearchUsersTypes } from "../../../domain/User/userRepository";
 import { User } from "../types/User";
 import { DatabaseSync } from 'node:sqlite';
+import { UserEntity } from "../../../domain/User/UserEntity";
 const database = new DatabaseSync('./database.sqlite');
 
 // aquí podría ir el knex
@@ -28,12 +29,13 @@ class SQLiteRepository implements UserRepository {
                 return { success: false, error: 'User not found' };
             }
             const userName = user.name.split(' ');
-            return { success: true, data: {
+            const userInstance = new UserEntity({
                 id: user.id,
                 firstName: userName[0],
                 lastName: userName[1],
                 email: user.email
-            }};
+            });
+            return { success: true, data: userInstance.toPrimitive() };
         } catch (error) {
             return { success: false, error: 'Error getting user' };
         }

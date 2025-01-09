@@ -19,8 +19,7 @@ class FindUserCommand implements FindUserCommandTypes {
         if(!user) {
             return { success: false as const, error: 'User not found' };
         }
-        const userInstance = new UserEntity(user);
-        return { success: true as const, data: userInstance.toPrimitive() };
+        return { success: true as const, data: user };
     }
 }
 
