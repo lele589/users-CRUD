@@ -1,6 +1,8 @@
 import { UserApplicationDTO } from "../../application/types/UserApplicationDTO";
 import { EntityInterface } from "../entityInterface";
 
+// TODO: create UserEntityError
+
 export class UserEntity implements EntityInterface<UserApplicationDTO> {
     private user: UserApplicationDTO;
     

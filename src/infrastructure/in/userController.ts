@@ -3,6 +3,7 @@ import { FindUserCommandTypes } from "../../application/commands/findUserCommand
 import { Request, Response } from 'express';
 import { UserControllerInterface } from "./UserControllerInterface";
 import { UserControllerDTO } from "./types/UserControllerDTO.js";
+import { ERRORS } from "../../errors.js";
 
 class UserController implements UserControllerInterface {
     private createUserCommand: CreateUserCommandInterface;
@@ -27,18 +28,20 @@ class UserController implements UserControllerInterface {
         // TODO: poner returns mejor
         try {
             const userId = Number(req.params.id); // Aqui podría ir JOI y la validación del contrato para que autotransforme el Id type
-            const { success, data: user } = await this.findUserCommand.execute(userId);
-            if (!success) {
-                res.status(500).json({ message: 'Unexpected error' });
-            } else {
-                if (!user) {
-                    res.status(404).json({ message: 'User not found' });
-                } else {
-                    res.status(200).json(user);
-                }
-            }
+            const user = await this.findUserCommand.execute(userId);
+            
+            res.status(200).json(user);
         } catch (error) {
-            res.status(400).json({ message: (error as Error).message });
+            switch ((error as Error).name) {
+                case ERRORS.INFRASTRUCTURE.DATABASE_UNEXPECTED_ERROR:
+                    res.status(503).json({ message: (error as Error).message });
+                    break;
+                case ERRORS.DOMAIN.USER_NOT_FOUND:
+                    res.status(404).json({ message: (error as Error).message });
+                    break;
+                default:
+                    res.status(500).json({ message: (error as Error).message });
+            }
         }
     }
 }

@@ -8,7 +8,7 @@ export type ResultType<T> =
     | { success: false; data?: never; error: string };
 
 export type CreateUserTypes = ResultType<User>;
-export type FindUserTypes = ResultType<EntityInterface<UserApplicationDTO>>;
+export type FindUserTypes = EntityInterface<UserApplicationDTO>;
 // export type SearchUsersTypes = ResultType<User[]>;
 
 export interface UserRepository {

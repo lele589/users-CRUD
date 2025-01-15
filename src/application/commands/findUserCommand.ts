@@ -4,7 +4,7 @@ import { FindUserTypes, ResultType } from "../../domain/User/userRepository";
 import { UserApplicationDTO } from "../types/UserApplicationDTO";
 
 export interface FindUserCommandTypes {
-    execute(userId: number): ResultType<UserApplicationDTO>;
+    execute(userId: number): UserApplicationDTO;
 }
 
 class FindUserCommand implements FindUserCommandTypes {
@@ -15,11 +15,7 @@ class FindUserCommand implements FindUserCommandTypes {
     }
 
     execute(userId: number) {
-        const { success, data: user } = this.userModel.findUser(userId);
-        if(!success) {
-            return { success: false as const, error: 'FindUserCommand - User not found' };
-        }
-        return { success: true as const, data: user };
+        return this.userModel.findUser(userId);
     }
 }
 
