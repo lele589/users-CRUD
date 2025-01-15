@@ -27,8 +27,8 @@ class UserController implements UserControllerInterface {
         // TODO: poner returns mejor
         try {
             const userId = Number(req.params.id); // Aqui podría ir JOI y la validación del contrato para que autotransforme el Id type
-            const { success, data: user} = await this.findUserCommand.execute(userId);
-            if(!success) {
+            const { success, data: user } = await this.findUserCommand.execute(userId);
+            if (!success) {
                 res.status(500).json({ message: 'Unexpected error' });
             } else {
                 if (!user) {

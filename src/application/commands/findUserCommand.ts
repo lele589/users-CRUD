@@ -16,8 +16,8 @@ class FindUserCommand implements FindUserCommandTypes {
 
     execute(userId: number) {
         const { success, data: user } = this.userModel.findUser(userId);
-        if(!user) {
-            return { success: false as const, error: 'User not found' };
+        if(!success) {
+            return { success: false as const, error: 'FindUserCommand - User not found' };
         }
         return { success: true as const, data: user };
     }

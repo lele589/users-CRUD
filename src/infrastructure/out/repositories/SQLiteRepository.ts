@@ -16,7 +16,7 @@ class SQLiteRepository implements UserRepository {
                 insert.run(userData.id, userData.name, userData.email);
                 return { success: true, data: userData };
             } catch (error) {
-                return { success: false, error: 'Error creating user' };
+                return { success: false, error: 'createUser - Error creating user' };
             }
     }
 
@@ -26,7 +26,7 @@ class SQLiteRepository implements UserRepository {
             // evitar usar 'AS', mejor un genérico si se puede definir
             const user = database.prepare('SELECT * FROM users WHERE id = ?').get(userId) as User | undefined; 
             if (!user) {
-                return { success: false, error: 'User not found' };
+                return { success: false, error: 'findUser - User not found' };
             }
             const userName = user.name.split(' ');
             const userInstance = new UserEntity({
@@ -37,7 +37,7 @@ class SQLiteRepository implements UserRepository {
             });
             return { success: true, data: userInstance.toPrimitive() };
         } catch (error) {
-            return { success: false, error: 'Error getting user' };
+            return { success: false, error: 'findUser - Error getting user' };
         }
     }
 }

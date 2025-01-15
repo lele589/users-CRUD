@@ -15,7 +15,6 @@ class CreateUserCommand implements CreateUserCommandInterface {
     }
 
     execute(userData: UserApplicationDTO) {
-        // TODO: manejar para que no llegue success/data al controller
         const newUserInstance = new UserEntity(userData);
         return this.userModel.createUser(newUserInstance);
     }
