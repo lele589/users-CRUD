@@ -1,6 +1,6 @@
 import { resolve } from "dns";
 import { data } from "../../../../../../node_modules/@remix-run/router/dist/utils";
-import { UserRepository, CreateUserTypes, FindUserTypes, SearchUsersTypes as SearchUsersTypes } from "../../../domain/User/userRepository";
+import { UserRepository, CreateUserTypes, FindUserTypes } from "../../../domain/User/userRepository";
 import { User } from "../types/User";
 import { DatabaseSync } from 'node:sqlite';
 import { UserEntity } from "../../../domain/User/UserEntity";
@@ -35,7 +35,7 @@ class SQLiteRepository implements UserRepository {
                 lastName: userName[1],
                 email: user.email
             });
-            return { success: true, data: userInstance.toPrimitive() };
+            return { success: true, data: userInstance };
         } catch (error) {
             return { success: false, error: 'findUser - Error getting user' };
         }

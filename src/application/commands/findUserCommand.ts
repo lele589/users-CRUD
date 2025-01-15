@@ -1,10 +1,10 @@
 import { UserEntity } from "../../domain/User/UserEntity";
 import { UserModelInterface } from "../../domain/User/UserModelInterface";
-import { FindUserTypes } from "../../domain/User/userRepository";
+import { FindUserTypes, ResultType } from "../../domain/User/userRepository";
 import { UserApplicationDTO } from "../types/UserApplicationDTO";
 
 export interface FindUserCommandTypes {
-    execute(userId: number): FindUserTypes;
+    execute(userId: number): ResultType<UserApplicationDTO>;
 }
 
 class FindUserCommand implements FindUserCommandTypes {

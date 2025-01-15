@@ -1,14 +1,15 @@
 import { UserApplicationDTO } from "../../application/types/UserApplicationDTO";
 import { User } from "../../infrastructure/out/types/User";
+import { EntityInterface } from "../entityInterface";
 
 // Genéricos: T para types, E para errors
-type ResultType<T> = 
+export type ResultType<T> = 
     { success: true; data: T; error?: never }
     | { success: false; data?: never; error: string };
 
 export type CreateUserTypes = ResultType<User>;
-export type FindUserTypes = ResultType<UserApplicationDTO>;
-export type SearchUsersTypes = ResultType<User[]>;
+export type FindUserTypes = ResultType<EntityInterface<UserApplicationDTO>>;
+// export type SearchUsersTypes = ResultType<User[]>;
 
 export interface UserRepository {
     createUser(userData: User): CreateUserTypes;

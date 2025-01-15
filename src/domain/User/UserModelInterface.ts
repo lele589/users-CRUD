@@ -1,8 +1,9 @@
+import { UserApplicationDTO } from "../../application/types/UserApplicationDTO";
 import { User } from "../../infrastructure/out/types/User";
 import { UserEntity } from "./UserEntity";
-import { CreateUserTypes, FindUserTypes } from "./userRepository";
+import { ResultType } from "./userRepository";
 
 export interface UserModelInterface {
-    createUser(userData: UserEntity): CreateUserTypes;
-    findUser(userId: number): FindUserTypes;
+    createUser(userData: UserEntity): ResultType<User>;
+    findUser(userId: number): ResultType<UserApplicationDTO>;
 }

@@ -17,6 +17,11 @@ export class UserModel implements UserModelInterface {
         }
     
         findUser(userId: number) {
-            return this.userRepository.findUser(userId);
+            const {success, data: userInstance} = this.userRepository.findUser(userId);
+            if (!success) {
+                return {success: false as const, error: 'User not found'};
+            }
+
+            return {success: true as const, data: userInstance.toPrimitive()};
         }
 }
