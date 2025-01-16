@@ -4,6 +4,7 @@ import { Request, Response } from 'express';
 import { UserControllerInterface } from "./UserControllerInterface";
 import { UserControllerDTO } from "./types/UserControllerDTO.js";
 import { ERRORS } from "../../errors.js";
+import { UserApplicationDTO } from "../../application/types/UserApplicationDTO.js";
 
 class UserController implements UserControllerInterface {
     private createUserCommand: CreateUserCommandInterface;
@@ -24,7 +25,7 @@ class UserController implements UserControllerInterface {
         }
     }
 
-    async findUser(req: Request<{ id: string }>, res: Response) {
+    async findUser(req: Request<{ id: string }>, res: Response<UserApplicationDTO | { type: string }>) {
         // TODO: poner returns mejor
         try {
             const userId = Number(req.params.id); // Aqui podría ir JOI y la validación del contrato para que autotransforme el Id type
@@ -34,13 +35,15 @@ class UserController implements UserControllerInterface {
         } catch (error) {
             switch ((error as Error).name) {
                 case ERRORS.INFRASTRUCTURE.DATABASE_UNEXPECTED_ERROR:
-                    res.status(503).json({ message: (error as Error).message });
+                    // Aqui podría ser incluso un 500, pensar siempre que el frontend no tiene porque saber los errores concretos, sino solo aquellos en los que queramos que responda de un modo concreto
+                    res.status(503).json({ type: 'ServiceUnavailable' });
                     break;
                 case ERRORS.DOMAIN.USER_NOT_FOUND:
-                    res.status(404).json({ message: (error as Error).message });
+                    res.status(404);
                     break;
                 default:
-                    res.status(500).json({ message: (error as Error).message });
+                    // loguear aqui o en otro lado para no perder la traza, pero el frontend no lo necesita tan explicito
+                    res.status(500);
             }
         }
     }
