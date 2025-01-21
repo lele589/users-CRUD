@@ -7,6 +7,7 @@
     "esModuleInterop": true, // para importar modulos externos que usan commonjs (require)
     "rootDir": "./src",
     "outDir": "./dist",
+    "experimentalDecorators": true
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
