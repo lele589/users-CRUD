@@ -2,7 +2,6 @@ import { UserRepository, CreateUserTypes, FindUserTypes } from "../../../domain/
 import { User } from "../types/User";
 import { DatabaseSync } from 'node:sqlite';
 import { UserEntity } from "../../../domain/User/UserEntity";
-import { INFRASTRUCTURE_ERRORS } from "../errors";
 import { ERRORS } from "../../../errors";
 import { UserApplicationDTO } from "../../../application/types/UserApplicationDTO";
 import { EntityInterface } from "../../../domain/entityInterface";

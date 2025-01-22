@@ -1,10 +1,10 @@
-import { CreateUserCommandInterface } from "../../application/commands/createUserCommand.js";
-import { FindUserCommandTypes } from "../../application/commands/findUserCommand.js";
+import { CreateUserCommandInterface } from "../../application/commands/createUserCommand";
+import { FindUserCommandTypes } from "../../application/commands/findUserCommand";
 import { Request, Response } from 'express';
 import { UserControllerInterface } from "./UserControllerInterface";
-import { UserControllerDTO } from "./types/UserControllerDTO.js";
-import { ERRORS } from "../../errors.js";
-import { UserApplicationDTO } from "../../application/types/UserApplicationDTO.js";
+import { UserControllerDTO } from "./types/UserControllerDTO";
+import { ERRORS } from "../../errors";
+import { UserApplicationDTO } from "../../application/types/UserApplicationDTO";
 
 class UserController implements UserControllerInterface {
     private createUserCommand: CreateUserCommandInterface;

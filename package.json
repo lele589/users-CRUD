@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A simple Express application for user management",
   "main": "src/app.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "start": "node dist/app.js",
     "dev": "tsx watch --experimental-sqlite src/app.ts",

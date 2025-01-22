@@ -1,4 +1,4 @@
-import { UserEntity } from '../../domain/User/UserEntity.js';
+import { UserEntity } from '../../domain/User/UserEntity';
 import { CreateUserTypes } from "../../domain/User/userRepository";
 import { UserApplicationDTO } from "../types/UserApplicationDTO";
 import { UserModelInterface } from "../../domain/User/UserModelInterface";

@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import setUserRoutes from './infrastructure/in/userRoutes.js';
-import { userController } from './infrastructure/container.js';
+import setUserRoutes from './infrastructure/in/userRoutes';
+import { userController } from './infrastructure/container';
 
 const app = express();
 const PORT = process.env.PORT || 3000;

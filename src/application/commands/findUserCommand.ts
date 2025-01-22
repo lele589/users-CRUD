@@ -1,6 +1,4 @@
-import { UserEntity } from "../../domain/User/UserEntity";
 import { UserModelInterface } from "../../domain/User/UserModelInterface";
-import { FindUserTypes, ResultType } from "../../domain/User/userRepository";
 import { UserApplicationDTO } from "../types/UserApplicationDTO";
 
 export interface FindUserCommandTypes {

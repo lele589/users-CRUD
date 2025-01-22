@@ -5,13 +5,13 @@ import { UserRepository } from "./userRepository";
 
 // Example
 // tambien se le puede pasar un parámetro cuando se llama al decorador, pero habría que modificar esta implementación
-function validateJoiContract(target: any, methodName: string, descriptor: PropertyDescriptor) {
-    const originalMethod = descriptor.value;
-    descriptor.value = function (...args: any[]) {
-        // JOI Validation
-        return originalMethod.apply(this, args);
-    };
-}
+// function validateJoiContract(target: any, methodName: string, descriptor: PropertyDescriptor) {
+//     const originalMethod = descriptor.value;
+//     descriptor.value = function (...args: any[]) {
+//         // JOI Validation
+//         return originalMethod.apply(this, args);
+//     };
+// }
 
 // Decorator (parecido a un middleware)
 // - target: this??

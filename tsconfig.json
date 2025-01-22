@@ -1,15 +1,17 @@
 {
   "compilerOptions": {
-    "module": "ES2022",
-    "target": "ES2023",
+    "module": "commonjs",
+    "target": "es6",
     "moduleResolution": "node",
     "strict": true,
+    "noImplicitAny": true,
     "skipLibCheck": true,
     "esModuleInterop": true, // para importar modulos externos que usan commonjs (require)
     "rootDir": "./src",
     "outDir": "./dist",
+    "noUnusedLocals": true,
     "experimentalDecorators": true
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/**.ts"],
   "exclude": ["node_modules"]
 }

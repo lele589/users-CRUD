@@ -1,10 +1,10 @@
-import UserController from './in/userController.js';
-import FindUserCommand from '../application/commands/findUserCommand.js';
-import CreateUserCommand from '../application/commands/createUserCommand.js';
-// import SQLiteRepository from './out/repositories/SQLiteRepository.js';
-import { UserModel } from '../domain/User/UserModel.js';
+import UserController from './in/userController';
+import FindUserCommand from '../application/commands/findUserCommand';
+import CreateUserCommand from '../application/commands/createUserCommand';
+// import SQLiteRepository from './out/repositories/SQLiteRepository';
+import { UserModel } from '../domain/User/UserModel';
 import * as awilix from 'awilix';
-import InMemoryUserRepository from './out/repositories/inMemoryUserRepository.js';
+import InMemoryUserRepository from './out/repositories/inMemoryUserRepository';
 
 const container = awilix.createContainer({
     // CLASSIC VS PROXY
