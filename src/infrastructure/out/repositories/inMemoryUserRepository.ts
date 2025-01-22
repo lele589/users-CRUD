@@ -1,4 +1,3 @@
-import { resolve } from "node:dns";
 import { CreateUserTypes, FindUserTypes, UserRepository } from "../../../domain/User/userRepository";
 import { User } from "../types/User";
 import { DatabaseResponseEmptyError } from "./SQLiteRepository";

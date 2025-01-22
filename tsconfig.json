@@ -2,6 +2,7 @@
   "compilerOptions": {
     "module": "ES2022",
     "target": "ES2023",
+    "moduleResolution": "node",
     "strict": true,
     "skipLibCheck": true,
     "esModuleInterop": true, // para importar modulos externos que usan commonjs (require)

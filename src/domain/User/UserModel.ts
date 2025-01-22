@@ -1,4 +1,3 @@
-import { UserApplicationDTO } from "../../application/types/UserApplicationDTO";
 import { ERRORS } from "../../errors";
 import { UserEntity } from "./UserEntity";
 import { UserModelInterface } from "./UserModelInterface";
@@ -57,13 +56,16 @@ export class UserModel implements UserModelInterface {
             const userInstance = await this.userRepository.findUser(userId);
             return userInstance.toPrimitive();
         } catch (error) {
-            console.log('switch', error.name);
-            switch ((error as Error).name) {
-                case ERRORS.INFRASTRUCTURE.DATABASE_RESPONSE_EMPTY_ERROR:
-                    console.log('CASE', error.name);
-                    throw new UserNotFoundError('User not found', 'findUser');
-                default:
-                    throw error; // revisar si funciona
+            if (error instanceof Error) {
+                switch ((error as Error).name) {
+                    case ERRORS.INFRASTRUCTURE.DATABASE_RESPONSE_EMPTY_ERROR:
+                        console.log('CASE', error.name);
+                        throw new UserNotFoundError('User not found', 'findUser');
+                    default:
+                        throw error;
+                }
+            } else {
+                throw error;
             }
         }
     }
