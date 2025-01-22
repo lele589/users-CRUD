@@ -8,8 +8,8 @@ import InMemoryUserRepository from './out/repositories/inMemoryUserRepository';
 
 const container = awilix.createContainer({
     // CLASSIC VS PROXY
-    // CLASSIC: se basa en el orden de los argumentos (más rápido pero menos flexible)
-    // PROXY: se basa en el nombre de los argumentos (como si fuese un object)
+    // CLASSIC: se basa en el orden de los argumentos (más rápido pero menos flexible)(no se recomienda minificando)
+    // PROXY: se basa en el nombre de los argumentos (como si fuese un object)(usar en frontend porque se minifica)
     injectionMode: awilix.InjectionMode.CLASSIC,
     strict: true,
 })
