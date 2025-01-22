@@ -5,5 +5,5 @@ import { ResultType } from "./userRepository";
 
 export interface UserModelInterface {
     createUser(userData: UserEntity): ResultType<User>;
-    findUser(userId: number): UserApplicationDTO;
+    findUser(userId: number): Promise<UserApplicationDTO>;
 }

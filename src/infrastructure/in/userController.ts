@@ -30,7 +30,7 @@ class UserController implements UserControllerInterface {
         try {
             const userId = Number(req.params.id); // Aqui podría ir JOI y la validación del contrato para que autotransforme el Id type
             const user = await this.findUserCommand.execute(userId);
-            
+
             res.status(200).json(user);
         } catch (error) {
             switch ((error as Error).name) {
@@ -39,11 +39,11 @@ class UserController implements UserControllerInterface {
                     res.status(503).json({ type: 'ServiceUnavailable' });
                     break;
                 case ERRORS.DOMAIN.USER_NOT_FOUND:
-                    res.status(404);
+                    res.status(404).send();
                     break;
                 default:
                     // loguear aqui o en otro lado para no perder la traza, pero el frontend no lo necesita tan explicito
-                    res.status(500);
+                    res.status(500).send();
             }
         }
     }

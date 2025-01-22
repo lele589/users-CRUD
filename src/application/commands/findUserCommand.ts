@@ -4,7 +4,7 @@ import { FindUserTypes, ResultType } from "../../domain/User/userRepository";
 import { UserApplicationDTO } from "../types/UserApplicationDTO";
 
 export interface FindUserCommandTypes {
-    execute(userId: number): UserApplicationDTO;
+    execute(userId: number): Promise<UserApplicationDTO>;
 }
 
 class FindUserCommand implements FindUserCommandTypes {

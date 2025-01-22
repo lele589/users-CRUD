@@ -52,9 +52,9 @@ export class UserModel implements UserModelInterface {
     }
 
     @log
-    findUser(userId: number) {
+    async findUser(userId: number) {
         try {
-            const userInstance = this.userRepository.findUser(userId);
+            const userInstance = await this.userRepository.findUser(userId);
             return userInstance.toPrimitive();
         } catch (error) {
             console.log('switch', error.name);
